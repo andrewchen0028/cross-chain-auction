@@ -1,0 +1,6 @@
+==============================================================================
+pubkey: HGgU33qssJN6tYjyWKv5hXAD1U5S5uwb5UKh1Duxtbfg
+==============================================================================
+Save this seed phrase and your BIP39 passphrase to recover your new keypair:
+harvest hard gentle unable hint tonight mechanic pill awkward fall brick vapor
+==============================================================================
