@@ -13,7 +13,6 @@ import { initChain, ChainConfigs } from "./wormhole/helpers";
 
 (async function () {
   //await roundTripAsset(BigInt(0), BigInt(100), "algorand", "solana");
-  //await roundTripAsset(BigInt(0), BigInt(100), "algorand", "avalanche");
   //await roundTripAsset(BigInt(0), BigInt(100), "algorand", "ethereum");
 
   await contractTransfer(

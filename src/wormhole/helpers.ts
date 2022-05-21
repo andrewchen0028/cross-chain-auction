@@ -1,14 +1,12 @@
 import { Connection } from "@solana/web3.js";
 import { Algodv2 } from "algosdk";
 import { ethers } from "ethers";
-import { ALGORAND_HOST, SOLANA_HOST, TERRA_HOST } from "./consts";
+import { ALGORAND_HOST, SOLANA_HOST } from "./consts";
 import { mnemonicToSecretKey } from "algosdk";
 import { Signer, WormholeChain } from "./wormhole";
 import { Algorand, AlgorandSigner } from "./chains/algorand";
 import { Ethereum, EthereumSigner } from "./chains/ethereum";
 import { Solana, SolanaSigner } from "./chains/solana";
-import { Avalanche, AvalancheSigner } from "./chains/avalanche";
-import { Coins, LCDClient } from "@terra-money/terra.js";
 
 type GetSignerFn = (client?: any) => Signer;
 type GetClientFn = () => any;
@@ -36,11 +34,6 @@ export const ChainConfigs: { [key: string]: ChainConfig } = {
     getSigner: getEthSigner,
     getClient: getEthConnection,
   },
-  avalanche: {
-    chain: (client: any) => new Avalanche(client),
-    getSigner: getAvaxSigner,
-    getClient: getAvaxConnection,
-  },
 };
 
 export function initChain(cc: ChainConfig): [WormholeChain, Signer] {
@@ -60,51 +53,27 @@ export function getAlgoConnection(): Algodv2 {
 }
 
 export function getEthConnection(network?: string): ethers.providers.Provider {
-  const apiKey = "2JKQAWARYH6QSI5QX5485DPHP3SN2EAI9Q";
+  const apiKey = "7TAE9N2T58GN4JTZS4HKN5GU7B1J9KSCWN";
   return new ethers.providers.EtherscanProvider(
     (network ||= "ropsten"),
     apiKey
   );
 }
 
-export function getAvaxConnection(): ethers.providers.Provider {
-  const url =
-    "https://speedy-nodes-nyc.moralis.io/236c92ab480d8cafac91f211/avalanche/testnet";
-  return new ethers.providers.JsonRpcProvider(url);
-}
-
-export function getTerraConnection(): LCDClient {
-  return new LCDClient({
-    URL: TERRA_HOST.URL,
-    chainID: TERRA_HOST.chainID,
-    gasPrices: {
-      uluna: 0.15,
-    } as Coins.Input,
-  });
-}
-
-// Plz dont steal all my testnet money
-
 export function getAlgoSigner(): AlgorandSigner {
   const mn =
-    "tenant helmet motor sauce appear buddy gloom park average glory course wire buyer ostrich history time refuse room blame oxygen film diamond confirm ability spirit";
+    "pizza hurry night ladder heart live whip property own slogan grape inner maze exact receive inquiry deliver baby push reform renew mouse second above task";
   return new AlgorandSigner(mnemonicToSecretKey(mn));
 }
 
 export function getSolSigner(): SolanaSigner {
   const pk =
-    "2v5fKQHaDLuWYBQCzFGvovnRNXPy8jkErWkeSMigs1PdsnQvRC5EMX3CJdULaEaQqaMNagfhsoj8sfQ7Dn2MnjKy";
+    "4gi9Mj93gANr1W1fwqDMmPMG6j8bRxp6R8ERKDji66yw2vzckLQuym6qWcrrEj4EFP8hPCCtJ54vtbbYRjpXHF3b";
   return new SolanaSigner(pk);
 }
 
 export function getEthSigner(provider: any): EthereumSigner {
   const ETH_PRIVATE_KEY =
-    "0x3f493e59e81db1be4ebbe18b28ba8fdd066ef44139420ead59f37f5dacb80719";
-  return new ethers.Wallet(ETH_PRIVATE_KEY, provider);
-}
-
-export function getAvaxSigner(provider: any): EthereumSigner {
-  const ETH_PRIVATE_KEY =
-    "0x3f493e59e81db1be4ebbe18b28ba8fdd066ef44139420ead59f37f5dacb80719";
+    "af7dae6096a3ce4b31f6ee0c31f58f0d46e706e88eaf29723fab9203413ca351";
   return new ethers.Wallet(ETH_PRIVATE_KEY, provider);
 }
